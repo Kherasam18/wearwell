@@ -48,8 +48,16 @@ export default function Heritage() {
               loading="lazy"
             />
           </div>
-          
-          <div className="pointer-events-none absolute -bottom-6 -left-6 hidden h-20 w-20 rounded-3xl border border-[var(--color-gold)]/30 bg-[var(--color-cream)] shadow-sm lg:block" />
+
+          <div className="absolute -bottom-10 -left-4 lg:-left-4 rounded-3xl border border-[var(--color-gold)]/30 bg-maroon text-cream px-3 py-4 shadow-xl">
+              <p className="font-playfair text-1xl font-bold">5</p>
+              <p className="text-sm font-semibold uppercase tracking-wider">Generations</p>
+            </div>    
+
+          {/* <div className="pointer-events-none absolute -bottom-6 -left-6 hidden h-20 w-20 rounded-3xl border border-[var(--color-gold)]/30 bg-[var(--color-cream)] shadow-sm lg:block">
+            <p className="font-playfair text-1xl font-bold">5</p>
+            <p className="text-sm font-semibold uppercase tracking-wider">Generations</p>
+          </div> */}
         </motion.div>
       </div>
     </section>

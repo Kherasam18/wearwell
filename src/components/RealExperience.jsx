@@ -43,7 +43,7 @@ export default function RealExperience() {
           </motion.h2>
 
           <Link
-            to="/collections"
+            to="/real-experience"
             className="mt-3 inline-block font-[var(--font-sans)] text-sm font-medium text-[var(--color-espresso)] underline underline-offset-4"
           >
             View all
@@ -75,7 +75,7 @@ export default function RealExperience() {
                 </h3>
 
                 <Link
-                  to="/collections"
+                  to="/real-experience"
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-maroon)] underline underline-offset-4"
                 >
                   See the look

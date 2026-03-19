@@ -1,15 +1,17 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Filter, Heart } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
 const occasions = [
-  { label: 'Wedding', imageSrc: '/images/sherwani1.jpg' },
-  { label: 'Haldi', imageSrc: '/images/pathani.png' },
-  { label: 'Sangeet', imageSrc: '/images/indowestern.png' },
-  { label: 'Mehndi', imageSrc: '/images/jodhpuri.png' },
-  { label: 'Cocktail', imageSrc: '/images/tuxedo.png' },
-  { label: 'Reception', imageSrc: '/images/blazer.png' },
-  { label: 'Party', imageSrc: '/images/tuxedo.png' },
-  { label: 'Kurtas', imageSrc: '/images/pathani.png' },
+  { label: 'All', imageSrc: '/images/logo.png' },
+  { label: 'Wedding', imageSrc: 'https://manyavar.scene7.com/is/image/manyavar/SHOS454_376-Natural_101.8769_26-02-2026-15-56:650x900?&dpr=on,2' },
+  { label: 'Haldi', imageSrc: 'https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg' },
+  { label: 'Sangeet', imageSrc: 'https://i.pinimg.com/736x/b5/c2/d4/b5c2d408fd4d6412a51aef583fb5d9a4.jpg' },
+  { label: 'Mehndi', imageSrc: 'https://i.pinimg.com/736x/03/3e/d2/033ed2761429933c9ebd7ef5a2de984c.jpg' },
+  { label: 'Cocktail', imageSrc: 'https://i.pinimg.com/originals/09/7c/a0/097ca0b6a83d21d788c0e505bee631d3.jpg' },
+  { label: 'Reception', imageSrc: 'https://i.pinimg.com/1200x/6b/bc/85/6bbc8553bf0a4c9fbc819fb30acd1474.jpg' },
+  { label: 'Party', imageSrc: 'https://i.pinimg.com/736x/8f/8f/ac/8f8fac157d53e50120e4cf25af16187b.jpg' },
+  { label: 'Kurtas', imageSrc: 'https://i.pinimg.com/736x/3a/93/d2/3a93d2b9dba3596d943d8fcca02579f9.jpg' },
 ]
 
 const types = [
@@ -31,7 +33,7 @@ const products = [
     id: 'p1',
     title: 'Cream Self Design Indo Western',
     tag: 'WEDDING WEAR',
-    imageSrc: '/images/indowestern.png',
+    imageSrc: 'https://i.pinimg.com/736x/41/63/6c/41636c796897bc1e7d5247c870f9aa76.jpg',
     occasion: 'Wedding',
     type: 'Indo western',
   },
@@ -39,7 +41,7 @@ const products = [
     id: 'p2',
     title: 'Maroon Classic Sherwani Set',
     tag: 'WEDDING WEAR',
-    imageSrc: '/images/sherwani1.jpg',
+    imageSrc: 'https://manyavar.scene7.com/is/image/manyavar/SHOS454_376-Natural_101.8769_26-02-2026-15-56:650x900?&dpr=on,2',
     occasion: 'Wedding',
     type: 'Sherwani',
   },
@@ -150,12 +152,20 @@ const products = [
 ]
 
 export default function CollectionPage() {
-  const [activeOccasion, setActiveOccasion] = useState('Wedding')
-  const [activeType, setActiveType] = useState('All')
+  const location = useLocation()
+
+  const [activeOccasion, setActiveOccasion] = useState(location.state?.activeOccasion || 'All')
+  const [activeType, setActiveType] = useState(location.state?.activeType || 'All')
+
+  useEffect(() => {
+    if (!location.state) return
+    if (location.state.activeOccasion) setActiveOccasion(location.state.activeOccasion)
+    if (location.state.activeType) setActiveType(location.state.activeType)
+  }, [location.state])
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      const occasionOk = p.occasion === activeOccasion
+      const occasionOk = activeOccasion === 'All' || p.occasion === activeOccasion
       const typeOk = activeType === 'All' || p.type === activeType
       return occasionOk && typeOk
     })
@@ -253,35 +263,41 @@ export default function CollectionPage() {
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-px bg-[#FAF8F4] sm:grid-cols-2 lg:grid-cols-4">
             {filteredProducts.map((p) => (
-              <article key={p.id} className="group bg-[#FAF8F4] transition-all duration-300 ease-in-out">
-                <div className="aspect-[3/4] w-full overflow-hidden bg-[#FDFBF7]">
-                  <img
-                    src={p.imageSrc}
-                    alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="bg-white/80 p-4 transition-colors duration-300 ease-in-out group-hover:bg-[#F9F6F0]">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex bg-[#d95321] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-                      {p.tag}
-                    </span>
-                    <button
-                      type="button"
-                      className="mt-0.5 inline-flex h-8 w-8 items-center justify-center"
-                      aria-label="Add to wishlist"
-                    >
-                      <Heart className="h-5 w-5 text-[var(--color-espresso)]/70" />
-                    </button>
+              <Link key={p.id} to={`/product/${p.id}`} className="block">
+                <article className="group bg-[#FAF8F4] transition-all duration-300 ease-in-out">
+                  <div className="aspect-[3/4] w-full overflow-hidden bg-[#FDFBF7]">
+                    <img
+                      src={p.imageSrc}
+                      alt={p.title}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
 
-                  <p className="mt-3 text-sm font-semibold leading-snug text-[var(--color-espresso)]">
-                    {p.title}
-                  </p>
-                </div>
-              </article>
+                  <div className="bg-white/80 p-4 transition-colors duration-300 ease-in-out group-hover:bg-[#F9F6F0]">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="inline-flex bg-[#d95321] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
+                        {p.tag}
+                      </span>
+                      <button
+                        type="button"
+                        className="mt-0.5 inline-flex h-8 w-8 items-center justify-center"
+                        aria-label="Add to wishlist"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                        }}
+                      >
+                        <Heart className="h-5 w-5 text-[var(--color-espresso)]/70" />
+                      </button>
+                    </div>
+
+                    <p className="mt-3 text-sm font-semibold leading-snug text-[var(--color-espresso)]">
+                      {p.title}
+                    </p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
 

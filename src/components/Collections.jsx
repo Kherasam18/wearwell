@@ -6,11 +6,30 @@ import { useNavigate } from 'react-router-dom'
 const items = [
   { title: 'Jodhpuri Suits', desc: 'Structured, regal silhouettes with modern finishing.', imageSrc: '/images/jodhpuri.png' },
   { title: 'Tuxedos', desc: 'Black-tie essentials tailored with precision.', imageSrc: '/images/tuxedo.png' },
-  { title: 'Sherwanis', desc: 'Wedding heritage wear crafted with refined detail.', imageSrc: '/images/sherwani1.jpg' },
+  { title: 'Sherwanis', desc: 'Wedding heritage wear crafted with refined detail.', imageSrc: 'https://manyavar.scene7.com/is/image/manyavar/SHOS454_376-Natural_101.8769_26-02-2026-15-56:650x900?&dpr=on,2' },
   { title: 'Indo-Western', desc: 'Contemporary fusion with a bespoke fit.', imageSrc: '/images/indowestern.png' },
   { title: 'Formal Blazers', desc: 'Sharp layers for boardroom to soirée.', imageSrc: '/images/blazer.png' },
   { title: 'Pathani Suits', desc: 'Classic comfort elevated through craft.', imageSrc: '/images/pathani.png' },
 ]
+
+function toActiveType(title) {
+  switch (title) {
+    case 'Jodhpuri Suits':
+      return 'Jodhpuri'
+    case 'Tuxedos':
+      return 'Tuxedo'
+    case 'Sherwanis':
+      return 'Sherwani'
+    case 'Indo-Western':
+      return 'Indo western'
+    case 'Formal Blazers':
+      return '2 pc Formal Suits'
+    case 'Pathani Suits':
+      return 'Ethnic'
+    default:
+      return 'All'
+  }
+}
 
 export default function Collections() {
   const navigate = useNavigate()
@@ -27,11 +46,19 @@ export default function Collections() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.03 }}
-            onClick={() => navigate('/collections')}
+            onClick={() =>
+              navigate('/collections', {
+                state: { activeType: toActiveType(item.title), activeOccasion: 'All' },
+              })
+            }
             role="link"
             tabIndex={0}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') navigate('/collections')
+              if (e.key === 'Enter' || e.key === ' ') {
+                navigate('/collections', {
+                  state: { activeType: toActiveType(item.title), activeOccasion: 'All' },
+                })
+              }
             }}
             className="group relative cursor-pointer overflow-hidden rounded-3xl border border-[var(--color-gold)]/20 bg-[var(--color-cream-2)] p-6 shadow-sm transition hover:border-[var(--color-maroon)]/35 hover:shadow"
           >

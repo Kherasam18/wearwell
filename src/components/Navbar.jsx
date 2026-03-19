@@ -6,9 +6,9 @@ const WHATSAPP_URL = 'https://wa.me/916284194620'
 
 const links = [
   // { label: 'Heritage', href: '/#heritage' },
-  { label: 'Collections', to: '/collections' },
+  { label: 'Collections', to: '/collections', state: { activeOccasion: 'All', activeType: 'All' } },
   // { label: 'The Bespoke Process', href: '/#bespoke-process' },
-  { label: 'Real Experience', to: '/#real-experience' },
+  { label: 'Real Experience', to: '/real-experience' },
 ]
 
 export default function Navbar({ onBookClick }) {
@@ -32,7 +32,12 @@ export default function Navbar({ onBookClick }) {
         <nav className="hidden items-center gap-6 text-sm text-[var(--color-black)] md:flex">
           {links.map((l) => (
             l.to ? (
-              <Link key={l.label} to={l.to} className="transition-colors hover:text-[var(--color-black)]">
+              <Link
+                key={l.label}
+                to={l.to}
+                state={l.state}
+                className="transition-colors hover:text-[var(--color-black)]"
+              >
                 {l.label}
               </Link>
             ) : (
