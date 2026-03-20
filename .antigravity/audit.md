@@ -1,6 +1,6 @@
 # 🔍 Project Audit Command
 
-You are performing a full project audit. Your job is to deeply analyze this entire codebase and produce a comprehensive `implemented.md` file at the root of the project.
+You are performing a full project audit. Your job is to deeply analyze this entire codebase and produce a comprehensive `implemented.md` file at the root of the project and if already present then update it.
 
 ## Instructions
 
@@ -37,6 +37,9 @@ Briefly explain the folder/file layout and what each major folder is responsible
 
 ### [Next Feature...]
 - ...
+
+## UI Enhancements 
+Lsit any suggestion where the UI/UX can get better.
 
 ## 🔌 Integrations & APIs
 List any third-party services, APIs, or external integrations that are wired up and working.
