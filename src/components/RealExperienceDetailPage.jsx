@@ -1,11 +1,18 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ArrowRight, Clock, Scissors, Sparkles } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { ArrowRight, ChevronDown, Clock, Scissors, Sparkles } from 'lucide-react'
 import BookingDrawer from './BookingDrawer.jsx'
 
 export default function RealExperienceDetailPage() {
   const [activeImage, setActiveImage] = useState(0)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [imageOpacity, setImageOpacity] = useState(1)
+  const thumbnailRef = useRef(null)
+
+  const scrollThumbnailsDown = () => {
+    if (thumbnailRef.current) {
+      thumbnailRef.current.scrollBy({ top: 192, behavior: 'smooth' })
+    }
+  }
 
   const portfolio = useMemo(
     () => ({
@@ -19,6 +26,8 @@ export default function RealExperienceDetailPage() {
         'https://i.pinimg.com/1200x/95/46/0f/95460f8e61f9cbfa98a018fabc03e154.jpg',
         'https://i.pinimg.com/736x/6c/ce/12/6cce1235000a290565220cdbd151b0e0.jpg',
         'https://i.pinimg.com/736x/d2/e9/c1/d2e9c1d3197179317cb3ecebf2da566f.jpg',
+        'https://i.pinimg.com/1200x/08/52/86/0852865bef32a5b168c190f27cc1871d.jpg',
+        'https://i.pinimg.com/736x/48/78/7f/48787f842050236e830e61fa7c747463.jpg',
       ],
       details: {
         fabric: 'Ivory silk blend with soft sheen',
@@ -41,31 +50,36 @@ export default function RealExperienceDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div className="lg:sticky lg:top-24 h-fit">
             <div className="flex gap-6">
-              <div className="flex w-20 flex-col gap-4">
-                {portfolio.images.map((src, idx) => {
-                  const isActive = idx === activeImage
-                  return (
-                    <button
-                      key={src}
-                      type="button"
-                      onClick={() => setActiveImage(idx)}
-                      className={
-                        'overflow-hidden bg-[#FAF8F4] transition ' +
-                        (isActive
-                          ? 'border-2 border-[#C9A84C]'
-                          : 'border-2 border-transparent opacity-70 hover:opacity-100')
-                      }
-                      aria-label={`View image ${idx + 1}`}
-                    >
-                      <img
-                        src={src}
-                        alt=""
-                        className="h-20 w-20 rounded-sm object-cover"
-                        loading="lazy"
-                      />
-                    </button>
-                  )
-                })}
+              <div>
+                <div ref={thumbnailRef} className="flex flex-col gap-4 w-20 max-h-[340px] overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#8E2121] [&::-webkit-scrollbar-thumb]:rounded-full [scrollbar-color:#8E2121_transparent] [scrollbar-width:thin]">
+                  {portfolio.images.map((src, idx) => {
+                    const isActive = idx === activeImage
+                    return (
+                      <button
+                        key={src}
+                        type="button"
+                        onClick={() => setActiveImage(idx)}
+                        className={
+                          'shrink-0 overflow-hidden bg-[#FAF8F4] transition ' +
+                          (isActive
+                            ? 'border-2 border-[#C9A84C]'
+                            : 'border-2 border-transparent opacity-70 hover:opacity-100')
+                        }
+                        aria-label={`View image ${idx + 1}`}
+                      >
+                        <img
+                          src={src}
+                          alt=""
+                          className="h-20 w-20 rounded-sm object-cover"
+                          loading="lazy"
+                        />
+                      </button>
+                    )
+                  })}
+                </div>
+                <button onClick={scrollThumbnailsDown} className="w-20 mt-2 py-2 flex justify-center items-center bg-transparent hover:bg-black/5 transition-colors cursor-pointer group">
+                  <ChevronDown className="w-6 h-6 text-black group-hover:translate-y-1 transition-transform" strokeWidth={1.5} />
+                </button>
               </div>
 
               <div className="flex-1">

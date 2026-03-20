@@ -59,12 +59,12 @@ export default function Heritage() {
             <p className="text-sm font-semibold uppercase tracking-wider">Generations</p>
           </div> */}
 
-          <div className="absolute -bottom-1 -left-10 lg:-left-3 w-24 h-24 rounded-full bg-[#8E2121] text-[#FAF8F4] shadow-2xl p-2">
-  <div className="w-full h-full rounded-full border border-dashed border-[#FFDF00]/70 flex flex-col items-center justify-center">
-    <p className="font-playfair text-2xl font-bold">5</p>
-    <p className="text-[9px] font-light uppercase tracking-widest mt-1">Generations</p>
-  </div>
-</div>
+          <div className="absolute -bottom-4 left-2 h-24 w-24 rounded-full bg-[#8E2121] p-2 text-[#FAF8F4] shadow-2xl sm:-left-4 md:-bottom-8 md:-left-8 lg:-left-12">
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-dashed border-[#FFDF00]/70">
+              <p className="font-playfair text-2xl font-bold">5</p>
+              <p className="mt-1 text-[9px] font-light uppercase tracking-widest">Generations</p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
