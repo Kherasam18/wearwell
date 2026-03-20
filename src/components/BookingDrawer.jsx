@@ -44,7 +44,6 @@ export default function BookingDrawer({ isOpen, onClose }) {
   const [garment, setGarment] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
-  const [hospitality, setHospitality] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -53,8 +52,8 @@ export default function BookingDrawer({ isOpen, onClose }) {
   }, [name, phone])
 
   const canContinueStep2 = useMemo(() => {
-    return garment.trim().length > 0 && hospitality.trim().length > 0
-  }, [garment, hospitality])
+    return garment.trim().length > 0
+  }, [garment])
 
   const canConfirm = useMemo(() => {
     return date.trim().length > 0 && time.trim().length > 0
@@ -79,7 +78,6 @@ export default function BookingDrawer({ isOpen, onClose }) {
     setGarment('')
     setDate('')
     setTime('')
-    setHospitality('')
     setIsSubmitting(false)
     setIsSuccess(false)
   }, [isOpen])
@@ -96,7 +94,6 @@ export default function BookingDrawer({ isOpen, onClose }) {
       selected_garment: garment,
       visit_date: date,
       visit_time: time,
-      user_refreshment_preference: hospitality,
     }
 
     try {
@@ -217,31 +214,6 @@ export default function BookingDrawer({ isOpen, onClose }) {
                         key={opt}
                         type="button"
                         onClick={() => setGarment(opt)}
-                        className={
-                          'rounded-full border px-6 py-2 text-sm font-semibold transition ' +
-                          (selected
-                            ? 'border-[#FDFBF7] bg-[#FDFBF7] text-[#3A2B24]'
-                            : 'border-[#C9A84C]/70 bg-transparent text-[#FDFBF7] hover:border-[#C9A84C]')
-                        }
-                      >
-                        {opt}
-                      </button>
-                    )
-                  })}
-                </div>
-
-                <h2 className="mt-10 font-[var(--font-serif)] text-2xl text-[#FFFFFF]/70 leading-tight md:text-3xl">
-                  What do you like to have?
-                </h2>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {['Tea', 'Coffee', 'Juice'].map((opt) => {
-                    const selected = hospitality === opt
-                    return (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setHospitality(opt)}
                         className={
                           'rounded-full border px-6 py-2 text-sm font-semibold transition ' +
                           (selected

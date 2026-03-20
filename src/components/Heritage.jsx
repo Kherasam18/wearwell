@@ -49,15 +49,22 @@ export default function Heritage() {
             />
           </div>
 
-          <div className="absolute -bottom-10 -left-4 lg:-left-4 rounded-3xl border border-[var(--color-gold)]/30 bg-maroon text-cream px-3 py-4 shadow-xl">
+          {/* <div className="absolute -bottom-10 -left-4 lg:-left-4 rounded-3xl border border-[var(--color-gold)]/30 bg-maroon text-cream px-3 py-4 shadow-xl">
               <p className="font-playfair text-1xl font-bold">5</p>
               <p className="text-sm font-semibold uppercase tracking-wider">Generations</p>
-            </div>    
+            </div>     */}
 
           {/* <div className="pointer-events-none absolute -bottom-6 -left-6 hidden h-20 w-20 rounded-3xl border border-[var(--color-gold)]/30 bg-[var(--color-cream)] shadow-sm lg:block">
             <p className="font-playfair text-1xl font-bold">5</p>
             <p className="text-sm font-semibold uppercase tracking-wider">Generations</p>
           </div> */}
+
+          <div className="absolute -bottom-1 -left-10 lg:-left-3 w-24 h-24 rounded-full bg-[#8E2121] text-[#FAF8F4] shadow-2xl p-2">
+  <div className="w-full h-full rounded-full border border-dashed border-[#FFDF00]/70 flex flex-col items-center justify-center">
+    <p className="font-playfair text-2xl font-bold">5</p>
+    <p className="text-[9px] font-light uppercase tracking-widest mt-1">Generations</p>
+  </div>
+</div>
         </motion.div>
       </div>
     </section>

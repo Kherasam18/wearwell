@@ -4,14 +4,14 @@ import { Link, useLocation } from 'react-router-dom'
 
 const occasions = [
   { label: 'All', imageSrc: '/images/logo.png' },
-  { label: 'Wedding', imageSrc: 'https://manyavar.scene7.com/is/image/manyavar/SHOS454_376-Natural_101.8769_26-02-2026-15-56:650x900?&dpr=on,2' },
-  { label: 'Haldi', imageSrc: 'https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg' },
+  { label: 'Wedding', imageSrc: 'https://i.pinimg.com/1200x/24/71/38/2471381e6e6ef5770db84f6c358d21ea.jpg' },
+  { label: 'Haldi', imageSrc: 'https://i.pinimg.com/1200x/0d/12/e5/0d12e549d62240a912006e4200e259a2.jpg' },
   { label: 'Sangeet', imageSrc: 'https://i.pinimg.com/736x/b5/c2/d4/b5c2d408fd4d6412a51aef583fb5d9a4.jpg' },
   { label: 'Mehndi', imageSrc: 'https://i.pinimg.com/736x/03/3e/d2/033ed2761429933c9ebd7ef5a2de984c.jpg' },
   { label: 'Cocktail', imageSrc: 'https://i.pinimg.com/originals/09/7c/a0/097ca0b6a83d21d788c0e505bee631d3.jpg' },
   { label: 'Reception', imageSrc: 'https://i.pinimg.com/1200x/6b/bc/85/6bbc8553bf0a4c9fbc819fb30acd1474.jpg' },
   { label: 'Party', imageSrc: 'https://i.pinimg.com/736x/8f/8f/ac/8f8fac157d53e50120e4cf25af16187b.jpg' },
-  { label: 'Kurtas', imageSrc: 'https://i.pinimg.com/736x/3a/93/d2/3a93d2b9dba3596d943d8fcca02579f9.jpg' },
+  { label: 'Kurtas', imageSrc: 'https://i.pinimg.com/1200x/17/86/9a/17869aa87c2d0a6b3bbb80ba307b1398.jpg' },
 ]
 
 const types = [
@@ -149,6 +149,14 @@ const products = [
     occasion: 'Mehndi',
     type: 'Short kurta',
   },
+  {
+    id: 'p9',
+    title: 'Self Design Yellow Kurta for Haldi',
+    tag: 'HALDI',
+    imageSrc: 'https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg',
+    occasion: 'Haldi',
+    type: 'Stylish kurta',
+  },
 ]
 
 export default function CollectionPage() {
@@ -174,46 +182,42 @@ export default function CollectionPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F4] text-[var(--color-espresso)]">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-10 pb-16">
-        <div
-          className="mx-auto flex max-w-5xl items-start justify-center gap-6 overflow-x-auto px-1 pb-3"
-          style={{ scrollbarWidth: 'none' }}
-        >
-          <style>{`[data-hide-scrollbar]::-webkit-scrollbar{display:none}`}</style>
-          <div
-            data-hide-scrollbar
-            className="flex items-start justify-center gap-6 overflow-x-auto"
-            style={{ scrollbarWidth: 'none' }}
-          >
-            {occasions.map((o) => {
-              const isActive = o.label === activeOccasion
-              return (
-                <button
-                  key={o.label}
-                  type="button"
-                  onClick={() => setActiveOccasion(o.label)}
-                  className="flex flex-col items-center gap-2 whitespace-nowrap"
+        <div className="flex items-center justify-start gap-4 md:gap-6 w-full max-w-8xl mx-1 px-2 md:px-6 py-4 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {occasions.map((o) => {
+            const isActive = o.label === activeOccasion
+            return (
+              <button
+                key={o.label}
+                type="button"
+                onClick={() => setActiveOccasion(o.label)}
+                className="shrink-0 flex flex-col items-center gap-2 whitespace-nowrap"
+              >
+                <div
+                  className={
+                    isActive
+                      ? 'rounded-full border border-[#8E2121] p-1'
+                      : 'rounded-full border border-transparent p-1'
+                  }
                 >
-                  <div
-                    className={
-                      isActive
-                        ? 'rounded-full border border-[#8E2121] p-1'
-                        : 'rounded-full border border-transparent p-1'
-                    }
-                  >
+                  <div className="h-20 w-20 overflow-hidden rounded-full md:h-24 md:w-24">
                     <img
                       src={o.imageSrc}
                       alt={o.label}
-                      className="h-20 w-20 rounded-full object-cover md:h-24 md:w-24"
+                      className={
+                        o.label === 'All'
+                          ? 'object-cover object-top scale-[1.15] translate-y-[10%] w-full h-full'
+                          : 'object-cover w-full h-full'
+                      }
                       loading="lazy"
                     />
                   </div>
-                  <span className="text-xs font-medium tracking-wide text-[var(--color-espresso)]/80">
-                    {o.label}
-                  </span>
-                </button>
-              )
-            })}
-          </div>
+                </div>
+                <span className="text-xs font-medium tracking-wide text-[var(--color-espresso)]/80">
+                  {o.label}
+                </span>
+              </button>
+            )
+          })}
         </div>
 
         <div className="mt-8 border-t border-black/10" />
@@ -236,11 +240,7 @@ export default function CollectionPage() {
           <p className="text-sm font-medium text-[var(--color-espresso)]/70">473 Results</p>
         </div>
 
-        <div
-          data-hide-scrollbar
-          className="mt-6 flex items-center justify-center gap-3 overflow-x-auto pb-2"
-          style={{ scrollbarWidth: 'none' }}
-        >
+        <div className="mt-6 flex items-center justify-start gap-3 w-full max-w-7xl mx-auto px-4 md:px-8 py-2 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {types.map((t) => {
             const isActive = t === activeType
             return (
@@ -250,8 +250,8 @@ export default function CollectionPage() {
                 onClick={() => setActiveType(t)}
                 className={
                   isActive
-                    ? 'whitespace-nowrap rounded-full bg-[#8E2121] px-4 py-2 text-xs font-semibold text-white'
-                    : 'whitespace-nowrap rounded-full border border-black/10 bg-[#FDFBF7] px-4 py-2 text-xs font-semibold text-[var(--color-espresso)]'
+                    ? 'whitespace-nowrap shrink-0 rounded-full bg-[#8E2121] px-4 py-2 text-xs font-semibold text-white'
+                    : 'whitespace-nowrap shrink-0 rounded-full border border-black/10 bg-[#FDFBF7] px-4 py-2 text-xs font-semibold text-[var(--color-espresso)]'
                 }
               >
                 {t}
